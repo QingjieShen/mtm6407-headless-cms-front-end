@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <router-view></router-view>
+  <h1>Hello!</h1>
 </template>
 
 <style scoped>
