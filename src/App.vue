@@ -1,11 +1,13 @@
 <script setup>
 
+import { RouterView } from "vue-router";
+
 </script>
 
 <template>
-    <router-view></router-view>
+    <Suspense>
+        <Router-view />
+    </Suspense>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
