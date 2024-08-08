@@ -1,17 +1,28 @@
 <script setup>
-
-import { ALL_PRODUCTS_URL } from '../utils'
+import { ALL_PRODUCTS_URL } from '../utils';
 import { useFetch } from '@vueuse/core';
+import { ref, onMounted } from 'vue';
 
-const { isFetching, data } = await useFetch(ALL_PRODUCTS_URL).json();
+const isLoading = ref(true);
 
-const products = data.value.data;
+const products = ref([]);
 
+onMounted(async () => {
+  const { data } = await useFetch(ALL_PRODUCTS_URL).json();
+  
+  if (data.value) {
+    products.value = data.value.data;
+  }
+
+  isLoading.value = false;
+});
 </script>
 
 <template>
   <h1>Products</h1>
-  <ul class="products">
+  <div v-if="isLoading" class="loader"></div>
+  <ul v-else class="products">
+    {{ console.log(products) }}
     <li v-for="product in products" :key="product.id">
       <a :href="`/details/${product.id}`" class="product-link">
         <img :src="product.attributes.image?.data?.attributes?.url || 'fallback-image-url.jpg'" class="product-image" />
@@ -94,5 +105,21 @@ const products = data.value.data;
   .products {
     grid-template-columns: 1fr; 
   }
+}
+
+/* Loader animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.5); 
+  border-left-color: #333; 
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 50px auto;
 }
 </style>
