@@ -1,11 +1,16 @@
 <script setup>
 import { ALL_PRODUCTS_URL } from '../utils';
 import { useFetch } from '@vueuse/core';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 const isLoading = ref(true);
-
 const products = ref([]);
+const searchQuery = ref('');
+
+const filteredProducts = computed(() => {
+  const query = searchQuery.value.toLowerCase();
+  return products.value.filter(product => product.attributes.maker.toLowerCase().includes(query) || product.attributes.model.toLowerCase().includes(query) || product.attributes.description.toLowerCase().includes(query) || product.attributes.color.toLowerCase().includes(query) || product.attributes.year.toString().toLowerCase().includes(query))
+});
 
 onMounted(async () => {
   const { data } = await useFetch(ALL_PRODUCTS_URL).json();
@@ -19,30 +24,54 @@ onMounted(async () => {
 </script>
 
 <template>
-  <h1>Products</h1>
   <div v-if="isLoading" class="loader"></div>
-  <ul v-else class="products">
-    <li v-for="product in products" :key="product.id">
-      <a :href="`/details/${product.id}`" class="product-link">
-        <img :src="product.attributes.image?.data?.attributes?.url || 'fallback-image-url.jpg'" class="product-image" />
-        <div class="product-info">
-          <h3 class="product-maker">{{ product.attributes.maker }}</h3>
-          <p class="product-model">{{ product.attributes.model }}</p>
-          <strong class="product-price">${{ product.attributes.price }}</strong>
-        </div>
-      </a>
-    </li>
-  </ul>
+  <div v-else>
+    <div class="header-text">
+      <h1>Products</h1>
+      <input class="search-input" v-model="searchQuery" type="text" placeholder="Search by vehicle info" />
+    </div>
+    <ul class="products">
+      <li v-for="product in filteredProducts" :key="product.id">
+        <a :href="`/details/${product.id}`" class="product-link">
+          <img :src="product.attributes.image?.data?.attributes?.url || 'fallback-image-url.jpg'" class="product-image" />
+          <div class="product-info">
+            <h3 class="product-maker">{{ product.attributes.maker }}</h3>
+            <p class="product-model">{{ product.attributes.year }} {{ product.attributes.model }}</p>
+            <strong class="product-price">${{ product.attributes.price }}</strong>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>
+
+.header-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-text .search-input {
+  height: 1.5rem;
+  justify-self: baseline;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  border: solid 1px #3c3c3c;
+}
+
 .products {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 16px; 
   list-style: none;
   padding: 0;
   margin: 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .products li {
@@ -94,15 +123,22 @@ onMounted(async () => {
   color: #333;
 }
 
-@media (max-width: 768px) {
+
+@media (min-width: 480px) {
   .products {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr; 
   }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 768px) {
   .products {
-    grid-template-columns: 1fr; 
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .products {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
