@@ -52,6 +52,7 @@ onMounted(async () => {
     text-align: left;
     font-size: 1.2rem;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .product-info-container {
