@@ -22,7 +22,6 @@ onMounted(async () => {
   <h1>Products</h1>
   <div v-if="isLoading" class="loader"></div>
   <ul v-else class="products">
-    {{ console.log(products) }}
     <li v-for="product in products" :key="product.id">
       <a :href="`/details/${product.id}`" class="product-link">
         <img :src="product.attributes.image?.data?.attributes?.url || 'fallback-image-url.jpg'" class="product-image" />
