@@ -32,14 +32,14 @@ onMounted(async () => {
     </div>
     <ul class="products">
       <li v-for="product in filteredProducts" :key="product.id">
-        <a :href="`/details/${product.id}`" class="product-link">
+        <router-link :to="`/details/${product.id}`" class="product-link">
           <img :src="product.attributes.image?.data?.attributes?.url || 'fallback-image-url.jpg'" class="product-image" />
           <div class="product-info">
             <h3 class="product-maker">{{ product.attributes.maker }}</h3>
             <p class="product-model">{{ product.attributes.year }} {{ product.attributes.model }}</p>
             <strong class="product-price">${{ product.attributes.price }}</strong>
           </div>
-        </a>
+        </router-link>
       </li>
     </ul>
   </div>
