@@ -113,7 +113,7 @@ onMounted(async () => {
 }
 
 .loader {
-  border: 4px solid rgba(0, 0, 0, 0.5); 
+  border: 4px solid rgba(0, 0, 0, 0.2); 
   border-left-color: #333; 
   border-radius: 50%;
   width: 40px;
