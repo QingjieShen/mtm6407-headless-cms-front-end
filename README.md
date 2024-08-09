@@ -15,7 +15,7 @@
 ## Technology
 - **Front-End:** Built with Vue.js, utilizing the @vueuse/core for data fetching and state management.
 - **Back-End:** The REST API is powered by a headless CMS built with Strapi, and hosted on Render. The API provides data for the front-end to consume.
-Deployment: The website is deployed and accessible at [https://headless-cms-product-review.netlify.app/](https://headless-cms-product-review.netlify.app/).
+- **Deployment:** The website is deployed and accessible at [https://headless-cms-product-review.netlify.app/](https://headless-cms-product-review.netlify.app/).
 
 ## Installation
 - To run this project locally, clone the repository and install the dependencies:
