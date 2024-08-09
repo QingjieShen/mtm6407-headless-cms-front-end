@@ -21,8 +21,6 @@ Deployment: The website is deployed and accessible at [https://headless-cms-prod
 - To run this project locally, clone the repository and install the dependencies:
 
 ```
-git clone <repository-url>
-cd <project-directory>
 npm install
 npm run dev
 ```
