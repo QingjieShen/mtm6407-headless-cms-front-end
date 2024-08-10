@@ -1,5 +1,5 @@
 <script setup>
-import { ALL_PRODUCTS_URL } from '../utils';
+import { ALL_PRODUCTS_URL, formatPrice } from '../utils';
 import { useFetch } from '@vueuse/core';
 import { ref, onMounted, computed } from 'vue';
 
@@ -21,6 +21,7 @@ onMounted(async () => {
 
   isLoading.value = false;
 });
+
 </script>
 
 <template>
@@ -37,7 +38,7 @@ onMounted(async () => {
           <div class="product-info">
             <h3 class="product-maker">{{ product.attributes.maker }}</h3>
             <p class="product-model">{{ product.attributes.year }} {{ product.attributes.model }}</p>
-            <strong class="product-price">${{ product.attributes.price }}</strong>
+            <strong class="product-price">${{ formatPrice(product.attributes.price) }}</strong>
           </div>
         </router-link>
       </li>
