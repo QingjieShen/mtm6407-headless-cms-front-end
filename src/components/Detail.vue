@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router';
 import { useFetch } from '@vueuse/core';
 import { ref, onMounted } from 'vue';
-import { ONE_PRODUCTS_URL } from '../utils';
+import { ONE_PRODUCTS_URL, formatPrice } from '../utils';
 
 const route = useRoute();
 const productId = route.params.id;
@@ -18,6 +18,7 @@ onMounted(async () => {
   }
   isLoading.value = false;
 });
+
 </script>
 
 <template>
@@ -31,7 +32,7 @@ onMounted(async () => {
           {{ product?.attributes?.year }} {{ product?.attributes?.maker }} {{ product?.attributes?.model || "" }}
         </h2>
         <p>{{ product?.attributes?.description }}</p>
-        <span class="product-price">Our Price: <strong class="product-price-value">${{ product?.attributes?.price }}</strong></span>
+        <span class="product-price">Our Price: <strong class="product-price-value">${{ formatPrice(product?.attributes?.price) }}</strong></span>
         <div class="product-actions">
           </div>
       </div>
