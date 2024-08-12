@@ -3,3 +3,18 @@ body {
     padding: 20px;
     font-family: Arial, Helvetica, sans-serif;
 }
+#app
+{
+    border: 1px solid #9a9a9a;
+    border-radius: 10px;
+    padding: 25px 5px 25px 5px;
+    background: #f9f9f9;
+}
+.products li
+{
+    box-shadow: 5px 12px 14px rgba(0, 0, 0, 0.3);
+}
+.product-detail
+{
+    box-shadow: 5px 12px 14px rgba(0, 0, 0, 0.3) !important;
+}
