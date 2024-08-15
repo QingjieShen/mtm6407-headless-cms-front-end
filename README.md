@@ -14,7 +14,7 @@
 
 ## Technology
 - **Front-End:** Built with Vue.js, utilizing the @vueuse/core for data fetching and state management.
-- **Back-End:** The REST API is powered by a headless CMS built with Strapi, and hosted on Render. The API provides data for the front-end to consume.
+- **Back-End:** The [REST API](https://mtm6407-headless-cms-back-end.onrender.com/api/vehicles?populate=*) is powered by a headless CMS built with Strapi, and hosted on Render. The API provides data for the front-end to consume.
 - **Deployment:** The website is deployed and accessible at [https://headless-cms-product-review.netlify.app/](https://headless-cms-product-review.netlify.app/).
 
 ## Installation
